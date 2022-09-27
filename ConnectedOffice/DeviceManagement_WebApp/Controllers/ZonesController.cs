@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using DeviceManagement_WebApp.Data;
 using DeviceManagement_WebApp.Models;
 using DeviceManagement_WebApp.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DeviceManagement_WebApp.Controllers
 {
+    [Authorize]//Adds security sothat only people who are logged in can access the site contents
     public class ZonesController : Controller
     {
         private readonly IZoneRepository _zoneRepository;
@@ -34,7 +36,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = _zoneRepository.GetById(id);//gets the details of the specified category
+            var zone = _zoneRepository.GetById(id);
             if (zone == null)
             {
                 return NotFound();
@@ -57,8 +59,8 @@ namespace DeviceManagement_WebApp.Controllers
         public IActionResult Create([Bind("ZoneId,ZoneName,ZoneDescription,DateCreated")] Zone zone)
         {
             zone.ZoneId = Guid.NewGuid();
-            _zoneRepository.Add(zone);//adds a new zone
-            _zoneRepository.Save();//saves the newly added zone
+            _zoneRepository.Add(zone);
+            _zoneRepository.Save();
 
             return RedirectToAction(nameof(Index));
         }
@@ -71,7 +73,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = _zoneRepository.GetById(id);//uses id to get a specified zone that has to be edited
+            var zone = _zoneRepository.GetById(id);
             if (zone == null)
             {
                 return NotFound();
@@ -93,8 +95,8 @@ namespace DeviceManagement_WebApp.Controllers
 
             try
             {
-                _zoneRepository.Edit(zone);//makes changes to a specified zone
-                _zoneRepository.Save();//saves the made changes to the existing zone
+                _zoneRepository.Edit(zone);
+                _zoneRepository.Save();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -133,9 +135,9 @@ namespace DeviceManagement_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(Guid id)
         {
-            var zone = _zoneRepository.GetById(id);//gets zone by id
-            _zoneRepository.Remove(zone);//deletes specified zone
-            _zoneRepository.Save();//saves the changes of the deleted zone
+            var zone = _zoneRepository.GetById(id);
+            _zoneRepository.Remove(zone);
+            _zoneRepository.Save();
             return RedirectToAction(nameof(Index));
         }
 

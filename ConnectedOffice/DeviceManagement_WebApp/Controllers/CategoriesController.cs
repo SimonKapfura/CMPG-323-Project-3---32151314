@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using DeviceManagement_WebApp.Data;
 using DeviceManagement_WebApp.Models;
 using DeviceManagement_WebApp.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DeviceManagement_WebApp.Controllers
 {
+    [Authorize]//Adds security sothat only people who are logged in can access the site contents
     public class CategoriesController : Controller
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -92,7 +94,7 @@ namespace DeviceManagement_WebApp.Controllers
             try
             {
                 _categoryRepository.Edit(category);//makes changes to a specified category
-                _categoryRepository.Save();//saves the made changes to the existing category
+                _categoryRepository.Save();//saves the made changes to the existing cateory
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -132,7 +134,7 @@ namespace DeviceManagement_WebApp.Controllers
         {
             var category = _categoryRepository.GetById(id);//gets category by id
             _categoryRepository.Remove(category); //deletes specified category
-            _categoryRepository.Save(); //saves the change of the deleted category
+            _categoryRepository.Save(); //saves the change made wich is the deletion of a category
             return RedirectToAction(nameof(Index));
         }
 
