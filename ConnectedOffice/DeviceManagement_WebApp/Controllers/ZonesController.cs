@@ -25,7 +25,7 @@ namespace DeviceManagement_WebApp.Controllers
         // GET: Categories
         public IActionResult Index()
         {
-            return View(_zoneRepository.GetAll());
+            return View(_zoneRepository.GetAll());//gets all the Zones
         }
 
         // GET: Zones/Details/5
@@ -36,7 +36,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = _zoneRepository.GetById(id);
+            var zone = _zoneRepository.GetById(id);//Gets a zone specified by the id
             if (zone == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace DeviceManagement_WebApp.Controllers
         public IActionResult Create([Bind("ZoneId,ZoneName,ZoneDescription,DateCreated")] Zone zone)
         {
             zone.ZoneId = Guid.NewGuid();
-            _zoneRepository.Add(zone);
+            _zoneRepository.Add(zone);//Addz a new zone and saves the newly added zone
             _zoneRepository.Save();
 
             return RedirectToAction(nameof(Index));
@@ -73,7 +73,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = _zoneRepository.GetById(id);
+            var zone = _zoneRepository.GetById(id);//gets a specific zone by ID
             if (zone == null)
             {
                 return NotFound();
@@ -95,8 +95,8 @@ namespace DeviceManagement_WebApp.Controllers
 
             try
             {
-                _zoneRepository.Edit(zone);
-                _zoneRepository.Save();
+                _zoneRepository.Edit(zone);//Makes changes to the specified zone
+                _zoneRepository.Save();//saves the changes made to  the zone
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -121,7 +121,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = _zoneRepository.GetById(id);
+            var zone = _zoneRepository.GetById(id);//uses id to get zone to be deleted
             if (zone == null)
             {
                 return NotFound();
@@ -135,9 +135,9 @@ namespace DeviceManagement_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(Guid id)
         {
-            var zone = _zoneRepository.GetById(id);
-            _zoneRepository.Remove(zone);
-            _zoneRepository.Save();
+            var zone = _zoneRepository.GetById(id);//uses id to get zone to be deleted
+            _zoneRepository.Remove(zone);//deletes the specified zone
+            _zoneRepository.Save();//saves the changes made by deleting the zone
             return RedirectToAction(nameof(Index));
         }
 

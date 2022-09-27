@@ -1,4 +1,5 @@
-﻿using DeviceManagement_WebApp.Models;
+﻿using DeviceManagement_WebApp.Data;
+using DeviceManagement_WebApp.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,5 +10,6 @@ namespace DeviceManagement_WebApp.Repository
     {
         Device GetDeviceById(Guid? id);
         IEnumerable<Device> GetAllDevices();
+        ConnectedOfficeContext GetContext();
     }
 }

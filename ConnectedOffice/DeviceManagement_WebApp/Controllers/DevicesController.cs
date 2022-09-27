@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using DeviceManagement_WebApp.Data;
 using DeviceManagement_WebApp.Models;
 using DeviceManagement_WebApp.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DeviceManagement_WebApp.Controllers
 {
+    [Authorize]
     public class DevicesController : Controller
     {
         private readonly IDeviceRepository _deviceRepository;
@@ -22,7 +24,7 @@ namespace DeviceManagement_WebApp.Controllers
         // GET: Devices
         public IActionResult Index()
         {
-            var deviceRepository = _deviceRepository.GetAllDevices();
+            var deviceRepository = _deviceRepository.GetAllDevices();//gets all the devices
             return View(deviceRepository.ToList());
         }
 
@@ -33,7 +35,6 @@ namespace DeviceManagement_WebApp.Controllers
             {
                 return NotFound();
             }
-
             var device = _deviceRepository.GetAllDevices();
             if (device == null)
             {
@@ -46,8 +47,8 @@ namespace DeviceManagement_WebApp.Controllers
         // GET: Devices/Create
         public IActionResult Create()
         {
-            //ViewData["CategoryId"] = new SelectList(_deviceRepository.Category, "CategoryId", "CategoryName");
-            //ViewData["ZoneId"] = new SelectList(_deviceRepository.Zone, "ZoneId", "ZoneName");
+            ViewData["CategoryId"] = new SelectList(_deviceRepository.GetContext().Category, "CategoryId", "CategoryName");//uses the context to create the dropdowns with information from the the category table
+            ViewData["ZoneId"] = new SelectList(_deviceRepository.GetContext().Zone, "ZoneId", "ZoneName");//uses the context to create the dropdowns with information from the the zone table
             return View();
         }
 
@@ -59,11 +60,9 @@ namespace DeviceManagement_WebApp.Controllers
         public IActionResult Create([Bind("DeviceId,DeviceName,CategoryId,ZoneId,Status,IsActive,DateCreated")] Device device)
         {
             device.DeviceId = Guid.NewGuid();
-            _deviceRepository.Add(device);
-            _deviceRepository.Save();
+            _deviceRepository.Add(device);//adds a new device
+            _deviceRepository.Save();//saves the newly added device
             return RedirectToAction(nameof(Index));
-
-
         }
 
         // GET: Devices/Edit/5
@@ -74,13 +73,13 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var device = _deviceRepository.GetById(id);
+            var device = _deviceRepository.GetById(id);//gets device that will be edited by id
             if (device == null)
             {
                 return NotFound();
             }
-            //ViewData["CategoryId"] = new SelectList(_deviceRepository, "CategoryId", "CategoryName", device.CategoryId);
-            //ViewData["ZoneId"] = new SelectList(_deviceRepository.g, "ZoneId", "ZoneName", device.ZoneId);
+            ViewData["CategoryId"] = new SelectList(_deviceRepository.GetContext().Category, "CategoryId", "CategoryName", device.CategoryId);//uses the context to create the dropdowns with information from the the category table
+            ViewData["ZoneId"] = new SelectList(_deviceRepository.GetContext().Zone, "ZoneId", "ZoneName", device.ZoneId);//uses the context to create the dropdowns with information from the the zone table
             return View(device);
         }
 
@@ -97,7 +96,7 @@ namespace DeviceManagement_WebApp.Controllers
             }
             try
             {
-                _deviceRepository.Edit(device);
+                _deviceRepository.Edit(device);//edits the existing device and saves the newly edited changes
                 _deviceRepository.Save();
             }
             catch (DbUpdateConcurrencyException)
@@ -123,7 +122,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var device = _deviceRepository.GetDeviceById(id);
+            var device = _deviceRepository.GetDeviceById(id);//Uses Id to get the device that will be deleted
             if (device == null)
             {
                 return NotFound();
@@ -137,8 +136,8 @@ namespace DeviceManagement_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(Guid id)
         {
-            var device = _deviceRepository.GetById(id);
-            _deviceRepository.Remove(device);
+            var device = _deviceRepository.GetById(id);//Uses Id to get the device that will be deleted
+            _deviceRepository.Remove(device);//deletes the sppecified device and saves changes
             _deviceRepository.Save();
             return RedirectToAction(nameof(Index));
         }
