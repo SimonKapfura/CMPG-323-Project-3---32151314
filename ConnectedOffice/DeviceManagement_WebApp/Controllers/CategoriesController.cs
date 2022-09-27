@@ -92,7 +92,7 @@ namespace DeviceManagement_WebApp.Controllers
             try
             {
                 _categoryRepository.Edit(category);//makes changes to a specified category
-                _categoryRepository.Save();//saves the made changes to the existing cateory
+                _categoryRepository.Save();//saves the made changes to the existing category
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -132,7 +132,7 @@ namespace DeviceManagement_WebApp.Controllers
         {
             var category = _categoryRepository.GetById(id);//gets category by id
             _categoryRepository.Remove(category); //deletes specified category
-            _categoryRepository.Save(); //saves the change made wich is the deletion of a category
+            _categoryRepository.Save(); //saves the change of the deleted category
             return RedirectToAction(nameof(Index));
         }
 
