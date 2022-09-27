@@ -1,4 +1,5 @@
 ﻿using DeviceManagement_WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DeviceManagement_WebApp.Controllers
 {
+    [Authorize]//Adds security sothat only people who are logged in can access the site contents
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
