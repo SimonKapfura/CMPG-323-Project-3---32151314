@@ -41,10 +41,13 @@ namespace DeviceManagement_WebApp.Repository
         {
             _context.Set<T>().RemoveRange(entities);
         }
+        //MY ADDITIONAL METHODS
+        //Saves any changes made when being called
         public void Save()
         {
             _context.SaveChanges();
         }
+        //Edits specified entity
         public void Edit(T entity)
         {
             _context.Set<T>().Update(entity);
