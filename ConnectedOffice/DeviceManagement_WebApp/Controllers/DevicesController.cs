@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DeviceManagement_WebApp.Controllers
 {
-    [Authorize]
+    [Authorize]//Adds security sothat only people who are logged in can access the site contents
     public class DevicesController : Controller
     {
         private readonly IDeviceRepository _deviceRepository;
@@ -35,7 +35,7 @@ namespace DeviceManagement_WebApp.Controllers
             {
                 return NotFound();
             }
-            var device = _deviceRepository.GetAllDevices();
+            var device = _deviceRepository.GetById(id);
             if (device == null)
             {
                 return NotFound();
