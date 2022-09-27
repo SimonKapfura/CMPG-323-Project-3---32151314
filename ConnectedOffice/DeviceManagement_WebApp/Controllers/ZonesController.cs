@@ -34,7 +34,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = _zoneRepository.GetById(id);
+            var zone = _zoneRepository.GetById(id);//gets the details of the specified category
             if (zone == null)
             {
                 return NotFound();
@@ -57,8 +57,8 @@ namespace DeviceManagement_WebApp.Controllers
         public IActionResult Create([Bind("ZoneId,ZoneName,ZoneDescription,DateCreated")] Zone zone)
         {
             zone.ZoneId = Guid.NewGuid();
-            _zoneRepository.Add(zone);
-            _zoneRepository.Save();
+            _zoneRepository.Add(zone);//adds a new zone
+            _zoneRepository.Save();//saves the newly added zone
 
             return RedirectToAction(nameof(Index));
         }
@@ -71,7 +71,7 @@ namespace DeviceManagement_WebApp.Controllers
                 return NotFound();
             }
 
-            var zone = _zoneRepository.GetById(id);
+            var zone = _zoneRepository.GetById(id);//uses id to get a specified zone that has to be edited
             if (zone == null)
             {
                 return NotFound();
@@ -93,8 +93,8 @@ namespace DeviceManagement_WebApp.Controllers
 
             try
             {
-                _zoneRepository.Edit(zone);
-                _zoneRepository.Save();
+                _zoneRepository.Edit(zone);//makes changes to a specified zone
+                _zoneRepository.Save();//saves the made changes to the existing zone
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -133,9 +133,9 @@ namespace DeviceManagement_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(Guid id)
         {
-            var zone = _zoneRepository.GetById(id);
-            _zoneRepository.Remove(zone);
-            _zoneRepository.Save();
+            var zone = _zoneRepository.GetById(id);//gets zone by id
+            _zoneRepository.Remove(zone);//deletes specified zone
+            _zoneRepository.Save();//saves the changes of the deleted zone
             return RedirectToAction(nameof(Index));
         }
 
