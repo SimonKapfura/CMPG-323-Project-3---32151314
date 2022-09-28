@@ -45,9 +45,12 @@ available at: https://devicemanagement32151314.azurewebsites.net/
 
 - The newly created Zone is now available
 - You have 3 options  as indicated on the right side of the newly added zone:
-  - Pen icon = Edit
-  - Eye icon = View details
-  - Bin icon = Delete
+  - Edit
+  ![](Pictures/Pen.png)
+  - View details
+  ![](Pictures/Eye.png)
+  - Delete
+  ![](Pictures/Bin.png)
 
 ![](Pictures/Zone4.png)
 
@@ -86,9 +89,12 @@ available at: https://devicemanagement32151314.azurewebsites.net/
 
 - The newly created category is now available
 - You have 3 options  as indicated on the right side of the newly added category:
-  - Pen icon = Edit
-  - Eye icon = View details
-  - Bin icon = Delete
+  - Edit
+  ![](Pictures/Pen.png)
+  - View details
+  ![](Pictures/Eye.png)
+  - Delete
+  ![](Pictures/Bin.png)
 
 ![](Pictures/Category3.png)
 
@@ -123,9 +129,12 @@ available at: https://devicemanagement32151314.azurewebsites.net/
 
 - The newly created Device is now available
 - You have 3 options  as indicated on the right side of the newly added Device:
-  - Pen icon = Edit
-  - Eye icon = View details
-  - Bin icon = Delete
+  - Edit
+  ![](Pictures/Pen.png)
+  - View details
+  ![](Pictures/Eye.png)
+  - Delete
+  ![](Pictures/Bin.png)
 
 ![](Pictures/Device3.png)
 
