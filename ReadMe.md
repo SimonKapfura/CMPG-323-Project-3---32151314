@@ -1,5 +1,6 @@
 # Project 3 Read me
-This ReadMe has all the information on how to use the Connected Office webapp
+This ReadMe has all the information on how to use the Connected Office web app
+available at: https://devicemanagement32151314.azurewebsites.net/
 
 # Security:
 - The image below shows what happens if someone tries to access any endpoint without being logged in:
