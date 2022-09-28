@@ -1,4 +1,16 @@
 # Project 3 Read me
+This ReadMe has all the information on how to use the Connected Office webapp
+
+# Security:
+- The image below shows what happens if someone tries to access any endpoint without being logged in:
+
+![](Pictures/Security1.png)
+
+- The web app will redirect to the login page and after loging in then they will see the contents of the endpoint
+
+![](Pictures/Security2.png)
+
+
 # Register:
 - To Register a new account click on the "Register as a new user" hyper link as indicated in the image below
 
@@ -133,8 +145,6 @@
 - Image below shows that the deleted Device is no longer there
 
 ![](Pictures/Device7.png)
-
-# Security:
 
 
 
